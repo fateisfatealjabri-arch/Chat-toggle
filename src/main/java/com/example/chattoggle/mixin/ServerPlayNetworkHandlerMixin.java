@@ -1,8 +1,8 @@
 package com.example.chattoggle.mixin;
 
 import com.example.chattoggle.ChatToggleMod;
-import net.minecraft.command.permission.Permissions;
 import net.minecraft.network.packet.c2s.play.ChatMessageC2SPacket;
+import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.network.ServerPlayNetworkHandler;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
@@ -18,7 +18,7 @@ public class ServerPlayNetworkHandlerMixin {
 
     @Inject(method = "onChatMessage", at = @At("HEAD"), cancellable = true)
     private void onChatMessage(ChatMessageC2SPacket packet, CallbackInfo ci) {
-        boolean isAdmin = this.player.getCommandSource().getPermissions().hasPermission(Permissions.COMMANDS_GAMEMASTER);
+        boolean isAdmin = CommandManager.GAMEMASTERS_CHECK.allows(this.player.getCommandSource().getPermissions());
         boolean canChat = ChatToggleMod.chatEnabled
             || isAdmin
             || ChatToggleMod.allowedPlayers.contains(this.player.getUuid());
