@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "id": "chattoggle",
+  "version": "${version}",
+  "name": "Chat Toggle",
+  "description": "Toggle server chat and manage per-player chat permissions.",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "com.example.chattoggle.ChatToggleMod"
+    ]
+  },
+  "mixins": [
+    "chattoggle.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.18.4",
+    "minecraft": "1.21.11",
+    "java": ">=21",
+    "fabric-api": "*"
+  }
+}
