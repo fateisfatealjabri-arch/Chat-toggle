@@ -27,7 +27,7 @@ public class ChatToggleMod implements ModInitializer {
 
     private void registerCommands(CommandDispatcher<ServerCommandSource> dispatcher) {
         dispatcher.register(CommandManager.literal("chat")
-            .requires(source -> source.hasPermissionLevel(2))
+            .requires(CommandManager.requirePermissionLevel(CommandManager.GAMEMASTERS_CHECK))
             .then(CommandManager.literal("disable")
                 .executes(context -> {
                     chatEnabled = false;
